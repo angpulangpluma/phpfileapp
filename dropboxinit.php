@@ -12,25 +12,38 @@ $app = new DropboxApp($id, $secret, $token);
 
 $dropbox = new Dropbox($app);
 
-$account = $dropbox->getCurrentAccount();
+$listFolderContents = $dropbox->listFolder("/");
+$items = $listFolderContents->getItems();
+
+echo "<br>";
+foreach ($items as $file){
+	echo $file->name . "<br>";
+}
+echo "<br>";
+//var_dump($items);
+//var_dump($items->all());
+
+//$account = $dropbox->getCurrentAccount();
 
 //Id
-$acntid = $account->getAccountId();
+//$acntid = $account->getAccountId();
 
 //Name
-$acntnme = $account->getDisplayName();
+//$acntnme = $account->getDisplayName();
 
 //Email
-$acntmail = $account->getEmail();
+//$acntmail = $account->getEmail();
 
 //Account Type
-$acnttype = $account->getAccountType();
+//$acnttype = $account->getAccountType();
 
-echo $acntid . " " . $acntnme . " " . $acntmail . " " . $acnttype;
+//echo $acntid . " " . $acntnme . " " . $acntmail . " " . $acnttype;
 
 //echo "in app:";
 //var_dump($app);
 //echo "\n in dropbox:";
 //var_dump($dropbox);
 //echo "\n";
+
+
 ?>
