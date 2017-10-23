@@ -8,7 +8,7 @@ include_once('backgroundprocess.php');
 include_once('factory.php');
 
 if (!class_exists(BackgroundProcess))
-  die("Oh no");
+  echo "Oh no";
 else{
 $process = new BackgroundProcess('sleep 5');
 $process->run();
@@ -22,3 +22,15 @@ echo "\nDone.\n";
 }
 
 ?>
+
+<html>
+
+<head>
+<title>Home</title>
+</head>
+
+<body>
+<a href="logout.php">Click here to logout</a>
+</body>
+
+</html>
