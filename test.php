@@ -30,6 +30,9 @@ echo "\nDone.\n";
 </head>
 
 <body>
+<?php
+include_once('dropboxinit.php');
+?>
 <a href="logout.php">Click here to logout</a>
 </body>
 
