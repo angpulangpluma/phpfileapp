@@ -32,6 +32,10 @@ class ComposerStaticInit93faa556e4ffb5d214fa29191e578a24
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
         ),
+        'C' => 
+        array (
+            'Cocur\\BackgroundProcess\\' => 24,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -58,6 +62,10 @@ class ComposerStaticInit93faa556e4ffb5d214fa29191e578a24
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Cocur\\BackgroundProcess\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cocur/background-process/src',
         ),
     );
 

@@ -4,7 +4,9 @@
  *
  * (c) 2013-2104 Florian Eckerstorfer
  */
+
 namespace Cocur\BackgroundProcess;
+
 /**
  * Factory to create BackgroundProcess objects.
  *
@@ -18,10 +20,12 @@ class Factory
 {
     /** @var string */
     private $className;
+
     public function __construct($className)
     {
         $this->className = $className;
     }
+
     public function newProcess($command)
     {
         $className = $this->className;

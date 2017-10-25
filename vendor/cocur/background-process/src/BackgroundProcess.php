@@ -1,12 +1,16 @@
 <?php
+
 /**
  * This file is part of cocur/background-process.
  *
  * (c) 2013-2015 Florian Eckerstorfer
  */
+
 namespace Cocur\BackgroundProcess;
-//use Exception;
-//use RuntimeException;
+
+use Exception;
+use RuntimeException;
+
 /**
  * BackgroundProcess.
  *
@@ -22,18 +26,22 @@ class BackgroundProcess
     const OS_WINDOWS = 1;
     const OS_NIX     = 2;
     const OS_OTHER   = 3;
+
     /**
      * @var string
      */
     private $command;
+
     /**
      * @var int
      */
     private $pid;
+
     /**
      * @var int
      */
     protected $serverOS;
+
     /**
      * @param string $command The command to execute
      *
@@ -44,6 +52,7 @@ class BackgroundProcess
         $this->command  = $command;
         $this->serverOS = $this->getOS();
     }
+
     /**
      * Runs the command in a background process.
      *
@@ -56,6 +65,7 @@ class BackgroundProcess
         if($this->command === null) {
             return;
         }
+
         switch ($this->getOS()) {
             case self::OS_WINDOWS:
                 shell_exec(sprintf('%s &', $this->command, $outputFile));
@@ -72,6 +82,7 @@ class BackgroundProcess
                 ));
         }
     }
+
     /**
      * Returns if the process is currently running.
      *
@@ -81,6 +92,7 @@ class BackgroundProcess
     {
         $this->checkSupportingOS('Cocur\BackgroundProcess can only check if a process is running on *nix-based '.
                                  'systems, such as Unix, Linux or Mac OS X. You are running "%s".');
+
         try {
             $result = shell_exec(sprintf('ps %d 2>&1', $this->pid));
             if (count(preg_split("/\n/", $result)) > 2 && !preg_match('/ERROR: Process ID out of range/', $result)) {
@@ -88,8 +100,10 @@ class BackgroundProcess
             }
         } catch (Exception $e) {
         }
+
         return false;
     }
+
     /**
      * Stops the process.
      *
@@ -99,6 +113,7 @@ class BackgroundProcess
     {
         $this->checkSupportingOS('Cocur\BackgroundProcess can only stop a process on *nix-based systems, such as '.
                                  'Unix, Linux or Mac OS X. You are running "%s".');
+
         try {
             $result = shell_exec(sprintf('kill %d 2>&1', $this->pid));
             if (!preg_match('/No such process/', $result)) {
@@ -106,8 +121,10 @@ class BackgroundProcess
             }
         } catch (Exception $e) {
         }
+
         return false;
     }
+
     /**
      * Returns the ID of the process.
      *
@@ -117,8 +134,10 @@ class BackgroundProcess
     {
         $this->checkSupportingOS('Cocur\BackgroundProcess can only return the PID of a process on *nix-based systems, '.
                                  'such as Unix, Linux or Mac OS X. You are running "%s".');
+
         return $this->pid;
     }
+
     /**
      * Set the process id.
      *
@@ -128,19 +147,23 @@ class BackgroundProcess
     {
         $this->pid = $pid;
     }
+
     /**
      * @return int
      */
     protected function getOS()
     {
         $os = strtoupper(PHP_OS);
+
         if (substr($os, 0, 3) === 'WIN') {
             return self::OS_WINDOWS;
         } else if ($os === 'LINUX' || $os === 'FREEBSD' || $os === 'DARWIN') {
             return self::OS_NIX;
         }
+
         return self::OS_OTHER;
     }
+
     /**
      * @param string $message Exception message if the OS is not supported
      *
@@ -154,6 +177,7 @@ class BackgroundProcess
             throw new RuntimeException(sprintf($message, PHP_OS));
         }
     }
+
     /**
      * @param int $pid PID of process to resume
      *
@@ -162,6 +186,7 @@ class BackgroundProcess
     static public function createFromPID($pid) {
         $process = new self();
         $process->setPid($pid);
+
         return $process;
     }
 }

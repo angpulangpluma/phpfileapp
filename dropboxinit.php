@@ -8,6 +8,13 @@ require_once 'vendor\autoload.php';
 use Kunnu\Dropbox\Dropbox;
 use Kunnu\Dropbox\DropboxApp;
 
+?>
+<html>
+<head>
+<title>Upload File</title>
+</head>
+<body>
+<?php
 $app = new DropboxApp($id, $secret, $token);
 
 $dropbox = new Dropbox($app);
@@ -20,6 +27,11 @@ foreach ($items as $file){
 	echo $file->name . "<br>";
 }
 echo "<br>";
+?>
+<form method="get" action="uploadfile.php">
+<input type="submit" value="Upload File">
+</form>
+<?php
 //var_dump($items);
 //var_dump($items->all());
 
@@ -45,5 +57,6 @@ echo "<br>";
 //var_dump($dropbox);
 //echo "\n";
 
-
 ?>
+</body>
+</html>
